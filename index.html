@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>Tower Quest</title>
+  </head>
+  <body>
+    <div class="coin" onclick="addcoin()">
+      <h2>Coins:</h2>
+      <h2 class="coincount"></h2>
+    </div>
+    <button class="startbtn" onclick="startGame()">Start Game</button>
+    <div class="game">
+      <i class="fas fa-times x1"> </i>
+      <div class="gamecontrol">
+        <div class="difficulty">
+          <h2>Difficulty:</h2>
+          <select name="difficulty" id="x101" class="difselct" onchange="difficulty()">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="impossible">Impossible</option>
+          </select>
+        </div>
+        <button class="autoplayer" onclick="showmodal()">Autoplay</button>
+      </div>
+      <div class="towerquest">
+        <ul class="r1">
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+        </ul>
+        <ul class="r2">
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+        </ul>
+        <ul class="r3">
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+        </ul>
+        <ul class="r4">
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+        </ul>
+        <ul class="r5">
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+        </ul>
+        <ul class="r6">
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+        </ul>
+        <ul class="r7">
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+        </ul>
+        <ul class="r8">
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+        </ul>
+        <ul class="r9 active">
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+          <li></p></li>
+        </ul>
+      </div>
+        <button onclick="restartGame()" class="restart101">Restart</button>
+    </div>
+    <div class="modal">
+      <i class="fas fa-times x2"> </i>
+      <h1>1 move = 1 coin</h1>
+      <div><h2>10 moves</h2> <h2>20 moves</h2> <h2>Infinite</h2></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
