@@ -301,6 +301,7 @@ const showmodal = () => {
     j.textContent = "Autoplay";
     console.log(moves, coin);
     coin = coin + moves;
+
     document.querySelector(".coincount").innerHTML = coin;
     moves = 0;
   } else {
