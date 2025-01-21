@@ -24,7 +24,7 @@ document.querySelector(".x2").addEventListener("click", () => {
   document.querySelector(".modal").style.display = "none";
 });
 const difficulty = () => {
-  if (document.querySelector("#x101").value == "easy") {
+  if (document.querySelector("#x101").value == "normal") {
     diflvl = 3;
   } else if (document.querySelector("#x101").value == "medium") {
     diflvl = 2;
@@ -342,3 +342,71 @@ const addcoin = () => {
   coin = coin + parseInt(j);
   document.querySelector(".coincount").innerHTML = coin;
 };
+
+// Incomplete Task 2
+// class TowerQuestGame {
+//   constructor() {
+//     this.levels = p;
+//     this.difficulties = ["Easy", "Medium", "Hard", "Impossible"];
+//     this.rtp = 0.98;
+//   }
+
+//   calculateProbabilitiesAndPayouts() {
+//     const levelsData = [];
+//     const baseWinChance = 0.7;
+//     const basePayout = 1.2;
+
+//     for (let level = 1; level <= this.levels; level++) {
+//       const levelData = { level, difficulties: {} };
+
+//       this.difficulties.forEach((difficulty, index) => {
+//         const difficultyFactor = (index + 1) * 0.1;
+//         const winChance = baseWinChance - level * 0.05 - difficultyFactor;
+//         const payout = basePayout + level * 0.3 + difficultyFactor * 2;
+
+//         levelData.difficulties[difficulty] = {
+//           winChance: Math.max(0.1, winChance),
+//           payout: parseFloat(payout.toFixed(2)),
+//         };
+//       });
+
+//       levelsData.push(levelData);
+//     }
+
+//     return levelsData;
+//   }
+
+//   calculateRTP(levelsData) {
+//     let totalWager = 0;
+//     let totalReturn = 0;
+
+//     levelsData.forEach((levelData) => {
+//       Object.values(levelData.difficulties).forEach((difficultyData) => {
+//         const { winChance, payout } = difficultyData;
+//         totalWager += 1;
+//         totalReturn += winChance * payout;
+//       });
+//     });
+
+//     return (totalReturn / totalWager).toFixed(2);
+//   }
+
+//   simulateGame() {
+//     const levelsData = this.calculateProbabilitiesAndPayouts();
+//     const actualRTP = this.calculateRTP(levelsData);
+
+//     console.log("Levels and Difficulty Data:", levelsData);
+//     console.log("Calculated RTP:", actualRTP);
+
+//     if (parseFloat(actualRTP) === this.rtp) {
+//       console.log("The game meets the 98% RTP requirement.");
+//     } else {
+//       console.log(
+//         `Adjustments needed to match RTP (current: ${actualRTP}, target: ${this.rtp})`
+//       );
+//     }
+//   }
+// }
+
+// const towerQuest = new TowerQuestGame();
+// towerQuest.simulateGame();
