@@ -5,6 +5,8 @@ let suprise = [];
 let bombber = [];
 let moves;
 let currentrow;
+let gamectr1 = false;
+let gamectr2 = false;
 document.querySelector(".coincount").innerHTML = coin;
 const startGame = () => {
   document.querySelector(".game").style.display = "flex";
@@ -23,18 +25,34 @@ document.querySelector(".x1").addEventListener("click", () => {
 document.querySelector(".x2").addEventListener("click", () => {
   document.querySelector(".modal").style.display = "none";
 });
-const difficulty = () => {
-  if (document.querySelector("#x101").value == "normal") {
-    diflvl = 3;
-  } else if (document.querySelector("#x101").value == "medium") {
-    diflvl = 2;
-  } else if (document.querySelector("#x101").value == "hard") {
-    diflvl = 1;
-  } else if (document.querySelector("#x101").value == "impossible") {
-    diflvl = 0;
-  }
-  for (let i = 0; i < 9; i++) {
-    [suprise[i], bombber[i]] = giftgenerator();
+const difficulty = async () => {
+  try {
+    if (document.querySelector("#x101").value == "normal") {
+      diflvl = 3;
+      gamectr1 = true;
+    } else if (document.querySelector("#x101").value == "medium") {
+      diflvl = 2;
+      gamectr1 = true;
+    } else if (document.querySelector("#x101").value == "hard") {
+      diflvl = 1;
+      gamectr1 = true;
+    } else if (document.querySelector("#x101").value == "impossible") {
+      diflvl = 0;
+      gamectr1 = true;
+    }
+    for (let i = 0; i < 9; i++) {
+      [suprise[i], bombber[i]] = giftgenerator();
+    }
+    if (gamectr1 == true) {
+      if (gamectr2 !== true) {
+        coin = coin + 1;
+      }
+      restartGame();
+    }
+  } catch (e) {
+    console.log(e);
+  } finally {
+    gamectr1 = false;
   }
 };
 
@@ -116,20 +134,17 @@ const restartGame = async () => {
       coin -= 1;
     }
     document.querySelector(".coincount").innerHTML = coin;
-    // Reset suprise array
     suprise = [];
     bombber = [];
     for (let i = 0; i < 9; i++) {
       [suprise[i], bombber[i]] = giftgenerator();
     }
-    // Reset all li elements
     document.querySelectorAll(".towerquest ul li").forEach((li) => {
       li.style.backgroundColor = "";
       li.querySelector("i")?.remove();
       li.querySelector("p")?.removeAttribute("style");
     });
 
-    // Reset active class to the last row
     document.querySelectorAll(".towerquest ul").forEach((ul, index) => {
       if (index === 8) {
         ul.classList.add("active");
@@ -137,10 +152,6 @@ const restartGame = async () => {
         ul.classList.remove("active");
       }
     });
-
-    // Reset game UI
-    document.querySelector(".game").style.display = "flex";
-    document.querySelector(".startbtn").style.display = "none";
   } catch (e) {
     console.log(e);
   } finally {
@@ -158,7 +169,7 @@ document.querySelectorAll(".towerquest ul li").forEach((li) => {
         li.parentElement
       ) + 1; // Row number
     column = Array.from(li.parentElement.children).indexOf(li) + 1; // Column number
-
+    gamectr2 = true;
     let upmove = "r" + (row - 1);
     let downmove = "r" + row;
     // console.log(upmove, downmove);
@@ -221,10 +232,10 @@ const findActiveRow = () => {
   }
 };
 
-async function cancelautoplay() {
-  moves = 0;
-  await autoplay();
-}
+// async function cancelautoplay() {
+//   moves = 0;
+//   await autoplay();
+// }
 
 async function autoplay() {
   if (moves <= 0) {
@@ -235,6 +246,7 @@ async function autoplay() {
   if (currentrow == 0) {
     currentrow = 9;
   }
+
   const playRound = async () => {
     console.log(currentrow, moves);
     if (currentrow == 0) {
@@ -301,7 +313,6 @@ const showmodal = () => {
     j.textContent = "Autoplay";
     console.log(moves, coin);
     coin = coin + moves;
-
     document.querySelector(".coincount").innerHTML = coin;
     moves = 0;
   } else {
@@ -322,12 +333,25 @@ document.querySelectorAll(".modal h2").forEach((h2) => {
       coin = 0;
     }
     let j = document.querySelector(".autoplayer");
-
     document.querySelector(".coincount").innerHTML = coin;
     document.querySelector(".modal").style.display = "none";
     j.textContent = "Cancel Autoplay";
     j.classList.add("cancel");
-    autoplay();
+    const redcheck = () => {
+      const listItems = document.querySelectorAll(".towerquest ul li");
+      for (let li of listItems) {
+        if (li.style.backgroundColor === "red") {
+          console.log("gg");
+          return true;
+        }
+      }
+    };
+    j = redcheck();
+    if (j == true) {
+      restartGame();
+    } else {
+      autoplay();
+    }
   });
 });
 
