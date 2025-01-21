@@ -172,8 +172,6 @@ document.querySelectorAll(".towerquest ul li").forEach((li) => {
     gamectr2 = true;
     let upmove = "r" + (row - 1);
     let downmove = "r" + row;
-    // console.log(upmove, downmove);
-    // console.log(`Row: ${row}, Column: ${column}`);
     let icon = document.createElement("i");
     let paragraph = li.querySelector("p");
     // console.log(suprise, bombber);
@@ -231,11 +229,6 @@ const findActiveRow = () => {
     return null;
   }
 };
-
-// async function cancelautoplay() {
-//   moves = 0;
-//   await autoplay();
-// }
 
 async function autoplay() {
   if (moves <= 0) {
